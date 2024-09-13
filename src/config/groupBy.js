@@ -23,6 +23,13 @@ export const priorityLabel = {
   4: "Urgent",
 };
 
+/**
+ * Groups tickets by their priority.
+ * @param {Object[]} tickets An array of ticket objects.
+ * @returns {Object} An object with the following properties: "No Priority", Urgent, High, Medium, Low.
+ * Each property is an array of ticket objects with the corresponding priority.
+ */
+
 export function groupByPriority(tickets) {
   const group = {
     "No Priority": [],
@@ -41,8 +48,6 @@ export function groupByPriority(tickets) {
 }
 
 export function groupByUsers(users, tickets) {
-  console.log(`inside the users function`);
-
   const group = {};
 
   users.forEach((user) => {
@@ -55,14 +60,10 @@ export function groupByUsers(users, tickets) {
     });
   });
 
-  console.log({ group });
-
   return group;
 }
 
 export default function groupBy(data, criteria) {
-  // console.log(tickets, { criteria });
-
   switch (criteria) {
     case "status":
       return groupByStatus(data.tickets);
