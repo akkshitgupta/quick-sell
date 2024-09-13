@@ -15,7 +15,7 @@ export function groupByStatus(tickets) {
   return group;
 }
 
-const priorityLabel = {
+export const priorityLabel = {
   0: "No Priority",
   1: "Low",
   2: "Medium",

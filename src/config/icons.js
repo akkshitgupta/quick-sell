@@ -11,15 +11,15 @@ import {
   Todo,
 } from "../assets";
 
-export function priorityLabel(priority) {
+export function priorityIcon(priority) {
   switch (priority) {
-    case 1:
+    case "Low":
       return PriorityLow;
-    case 2:
+    case "Medium":
       return PriorityMedium;
-    case 3:
+    case "High":
       return PriorityHigh;
-    case 4:
+    case "Urgent":
       return PriorityUrgentColour;
     default:
       return NoPriority;

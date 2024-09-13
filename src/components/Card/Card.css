@@ -29,10 +29,10 @@
 
 .card-title {
   display: flex;
-  gap: 5px;
+  gap: 10px;
   align-items: start;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .card-tags {
@@ -43,7 +43,6 @@
 
 .card-tags img {
   width: 12%;
-  height: auto;
 }
 
 .tag {

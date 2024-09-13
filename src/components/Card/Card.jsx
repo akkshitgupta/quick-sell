@@ -1,4 +1,5 @@
-import { priorityLabel, statusIcon } from "../../config/icons";
+import { priorityLabel } from "../../config/groupBy";
+import { priorityIcon, statusIcon } from "../../config/icons";
 import { useDisplay } from "../../contexts/DisplayContext";
 import "./Card.css";
 
@@ -24,7 +25,7 @@ export default function Card({ task }) {
           {display.group !== "priority" && (
             <img
               className="tag"
-              src={priorityLabel(task.priority)}
+              src={priorityIcon(priorityLabel[task.priority])}
               alt="Priority"
             />
           )}

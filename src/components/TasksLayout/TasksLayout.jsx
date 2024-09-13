@@ -1,10 +1,8 @@
 import { Card, GroupHeader } from "..";
-import { priorityLabel, statusIcon } from "../../config/icons";
-import groupBy from "../../config/groupBy";
+import { priorityIcon, statusIcon } from "../../config/icons";
 import useFetchApi from "../../config/useFetchApi";
-import "./TasksLayout.css";
-import { useEffect, useState } from "react";
 import { useDisplay } from "../../contexts/DisplayContext";
+import "./TasksLayout.css";
 
 export default function TasksLayout() {
   const { display } = useDisplay();
@@ -17,7 +15,7 @@ export default function TasksLayout() {
       case "status":
         return statusIcon(category);
       case "priority":
-        return priorityLabel(category);
+        return priorityIcon(category);
     }
   };
 
