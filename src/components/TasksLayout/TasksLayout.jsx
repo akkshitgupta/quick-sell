@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Card, GroupHeader } from "..";
+import groupBy from "../../config/groupBy";
 import { priorityIcon, statusIcon } from "../../config/icons";
-import useFetchApi from "../../config/useFetchApi";
+import sortBy from "../../config/sortBy";
 import { useDisplay } from "../../contexts/DisplayContext";
 import "./TasksLayout.css";
 
@@ -15,12 +17,15 @@ import "./TasksLayout.css";
  *
  * The component will also render a loading screen if the `group` property is not set.
  *
- * @param {{ display: { group: "status" | "priority" } }} props
+ * @param {{ display: { group: "status" | "priority" | "user" } }} props
  * @returns {JSX.Element}
  */
-export default function TasksLayout() {
+export default function TasksLayout({ data }) {
   const { display } = useDisplay();
-  const { data, group } = useFetchApi();
+  const [group, setGroup] = useState(null);
+  useEffect(() => {
+    setGroup(groupBy(data, display.group));
+  }, [data, display]);
 
   const headerIcons = (category) => {
     switch (display.group) {
@@ -31,24 +36,22 @@ export default function TasksLayout() {
     }
   };
 
-  return !group ? (
-    <div className="loader-screen">
-      <span className="loader"></span>
-    </div>
-  ) : (
-    <div className="tasks-layout">
-      {Object.keys(group).map((category, ind) => (
-        <div key={ind}>
-          <GroupHeader
-            title={category}
-            icon={headerIcons(category)}
-            length={group[category]?.length}
-          />
-          {group[category].map((ticket, cardInd) => (
-            <Card task={ticket} key={cardInd} />
-          ))}
-        </div>
-      ))}
-    </div>
+  return (
+    group && (
+      <div className="tasks-layout">
+        {Object.keys(group).map((category, ind) => (
+          <div key={ind}>
+            <GroupHeader
+              title={category}
+              icon={headerIcons(category)}
+              length={group[category]?.length}
+            />
+            {sortBy(group[category], display.order).map((ticket, cardInd) => (
+              <Card task={ticket} key={cardInd} />
+            ))}
+          </div>
+        ))}
+      </div>
+    )
   );
 }
